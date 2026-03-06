@@ -1423,9 +1423,8 @@
 
 </div><!-- /page -->
 
-<script>
-  // Rendered / Source tab toggle
-  const rawSource = `# Compliance Agent – Full System Directive
+<textarea id="raw-source" hidden>
+# Compliance Agent - Full System Directive
 
 > This document contains the complete system directives for all 9 interaction flows of the Compliance Agent.
 
@@ -1453,7 +1452,7 @@ You are a security compliance assistant delivering a push notification via Googl
 
 ## 2. Software List
 
-You are presenting the user's list of non-compliant software. Be concise. Show the most urgent item first. Make it easy to act on one item at a time. The goal is to reduce friction and help the user start—not to overwhelm them with the full scope of the problem.
+You are presenting the user's list of non-compliant software. Be concise. Show the most urgent item first. Make it easy to act on one item at a time. The goal is to reduce friction and help the user start - not to overwhelm them with the full scope of the problem.
 
 **Tone:** Organized, Calm, Action-oriented
 
@@ -1487,7 +1486,7 @@ You are guiding the user through an uninstall. This can feel high-stakes to user
 
 ## 5. Exemption Flow
 
-You are helping the user request an exemption for software they cannot remediate. Ask only for what's needed. Frame questions neutrally—no judgment about why they need an exemption. Help them build a strong case efficiently.
+You are helping the user request an exemption for software they cannot remediate. Ask only for what's needed. Frame questions neutrally - no judgment about why they need an exemption. Help them build a strong case efficiently.
 
 **Tone:** Neutral, Efficient, Non-judgmental
 
@@ -1503,7 +1502,7 @@ You are sending a follow-up reminder. The user has already been notified at leas
 
 ## 7. Urgency
 
-The user's deadline is approaching or has passed. Communicate urgency clearly without panic. Specify the exact consequence and timeline. Offer one immediate action. Do not send repeatedly—once per day maximum unless block is imminent.
+The user's deadline is approaching or has passed. Communicate urgency clearly without panic. Specify the exact consequence and timeline. Offer one immediate action. Do not send repeatedly - once per day maximum unless block is imminent.
 
 **Tone:** Urgent, Specific, Calm-but-serious
 
@@ -1517,11 +1516,18 @@ You are confirming the user's compliance status after they have taken action. Be
 
 ---
 
-## 9. Help & Support
+## 9. Help &amp; Support
 
 The user needs assistance beyond self-service. Acknowledge their situation. Route them to the right support channel quickly. Do not make them explain themselves at length before they can get help.
 
-**Tone:** Empathetic, Efficient, Helpful`;
+**Tone:** Empathetic, Efficient, Helpful
+</textarea>
+
+<script>
+  // Rendered / Source tab toggle
+  function getRawSource() {
+    return document.getElementById('raw-source').value;
+  }
 
   function switchFSDView(view, btn) {
     const rendered = document.getElementById('fsd-content');
@@ -1529,7 +1535,7 @@ The user needs assistance beyond self-service. Acknowledge their situation. Rout
     document.querySelectorAll('.fsd-view-tabs button').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     if (view === 'source') {
-      if (!source.textContent.trim()) source.textContent = rawSource;
+      if (!source.textContent.trim()) source.textContent = getRawSource();
       rendered.style.display = 'none';
       source.style.display = 'block';
     } else {
@@ -1564,10 +1570,10 @@ The user needs assistance beyond self-service. Acknowledge their situation. Rout
     });
   }
 
-  // Get current source — uses edited source if available, otherwise falls back to rawSource
+  // Get current source — uses edited source if available, otherwise falls back to textarea
   function getCurrentSource() {
     const sourceEl = document.getElementById('fsd-source');
-    return sourceEl.textContent.trim() || rawSource;
+    return sourceEl.textContent.trim() || getRawSource();
   }
 
   // Parse source and extract the directive for a given section number
@@ -1600,4 +1606,11 @@ The user needs assistance beyond self-service. Acknowledge their situation. Rout
       if (window.scrollY >= sec.offsetTop - 60) current = sec.id;
     });
     navLinks.forEach(link => {
-      lin
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
