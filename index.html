@@ -18,14 +18,22 @@
     .top-nav {
       background: #fff;
       border-bottom: 1px solid #ddd;
-      padding: 0 24px;
+      padding: 0 0 0 24px;
       display: flex;
-      gap: 2px;
-      overflow-x: auto;
+      align-items: center;
       position: sticky;
       top: 0;
       z-index: 100;
     }
+    .nav-tabs {
+      display: flex;
+      gap: 2px;
+      overflow-x: auto;
+      flex: 1;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
     .top-nav a {
       display: inline-block;
       padding: 11px 14px;
@@ -364,18 +372,17 @@
 
     /* ── LEARN MORE BUTTON ── */
     .learn-more-btn {
-      margin-left: auto;
-      align-self: center;
+      flex-shrink: 0;
+      align-self: stretch;
       background: none;
-      border: 1.5px solid #e8640c;
+      border: none;
+      border-left: 1px solid #e5e7eb;
       color: #e8640c;
-      padding: 5px 14px;
-      border-radius: 4px;
+      padding: 0 20px;
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
-      flex-shrink: 0;
     }
     .learn-more-btn:hover { background: #e8640c; color: #fff; }
 
@@ -551,15 +558,17 @@
 
 <!-- TOP NAV -->
 <nav class="top-nav">
-  <a href="#section-1" class="active">1 · Notification</a>
-  <a href="#section-2">2 · List</a>
-  <a href="#section-3">3 · Update Flow</a>
-  <a href="#section-4">4 · Uninstall Flow</a>
-  <a href="#section-5">5 · Exemption</a>
-  <a href="#section-6">6 · Reminders</a>
-  <a href="#section-7">7 · Urgency</a>
-  <a href="#section-8">8 · Verification</a>
-  <a href="#section-9">9 · Help &amp; Support</a>
+  <div class="nav-tabs">
+    <a href="#section-1" class="active">1 · Notification</a>
+    <a href="#section-2">2 · List</a>
+    <a href="#section-3">3 · Update Flow</a>
+    <a href="#section-4">4 · Uninstall Flow</a>
+    <a href="#section-5">5 · Exemption</a>
+    <a href="#section-6">6 · Reminders</a>
+    <a href="#section-7">7 · Urgency</a>
+    <a href="#section-8">8 · Verification</a>
+    <a href="#section-9">9 · Help &amp; Support</a>
+  </div>
   <button class="learn-more-btn" onclick="document.getElementById('guide-modal').classList.remove('hidden')">Learn more</button>
 </nav>
 
