@@ -1593,7 +1593,7 @@ The user needs assistance beyond self-service. Acknowledge their situation. Rout
   function copyDirective(sectionNum) {
     const text = getDirectiveForSection(sectionNum);
     navigator.clipboard.writeText(text).then(() => {
-      showToast(`Interaction ${sectionNum} system directive copied to clipboard!`);
+      showToast('Interaction ' + sectionNum + ' system directive copied to clipboard!');
     });
   }
 
