@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Airlock CVE Remediation Agent – Content Design</title>
+  <title>Compliance Agent – Content Design</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -55,7 +55,7 @@
       user-select: none;
     }
     .fsd-header-left { display: flex; align-items: center; gap: 10px; }
-    .fsd-toggle { color: #aaa; font-size: 13px; }
+    .fsd-toggle { color: #aaa; font-size: 22px; line-height: 1; }
     .fsd-title { font-size: 15px; font-weight: 700; }
     .fsd-subtitle { font-size: 11px; color: #9ca3af; margin-top: 2px; }
     .fsd-body {
@@ -344,9 +344,88 @@
     .fsd-content::-webkit-scrollbar { width: 6px; }
     .fsd-content::-webkit-scrollbar-track { background: #1f2937; }
     .fsd-content::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+
+    /* ── INTRO MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.hidden { display: none; }
+    .modal {
+      background: #fff;
+      border-radius: 6px;
+      max-width: 480px;
+      width: 90%;
+      padding: 36px 36px 28px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+    .modal-eyebrow {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: #e8640c;
+      margin-bottom: 10px;
+    }
+    .modal h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+    .modal p {
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+    .modal-contact {
+      font-size: 12.5px;
+      color: #6b7280;
+      margin-top: 16px;
+      margin-bottom: 0;
+    }
+    .modal-contact a { color: #2563eb; text-decoration: none; }
+    .modal-contact a:hover { text-decoration: underline; }
+    .modal-footer {
+      margin-top: 24px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .modal-btn {
+      background: #e8640c;
+      color: #fff;
+      border: none;
+      padding: 9px 22px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .modal-btn:hover { background: #d45a09; }
   </style>
 </head>
 <body>
+
+<!-- INTRO MODAL -->
+<div class="modal-overlay" id="intro-modal">
+  <div class="modal">
+    <div class="modal-eyebrow">Prototype Concept</div>
+    <h2>Agentic Content Design: Engineering Handoff</h2>
+    <p>This prototype demonstrates how agentic content design flows can be structured for handoff to engineering — covering interaction models, voice &amp; tone specifications, variable scripts, and quick action architecture.</p>
+    <p>The concept and content were designed by <strong>J. Conor Sullivan</strong>. The scenario depicts an enterprise agent that guides employees through remediating non-compliant software on their work devices. All product and brand references have been whitelabeled.</p>
+    <p class="modal-contact">Contact: <a href="mailto:jconor.sullivan@gmail.com">jconor.sullivan@gmail.com</a></p>
+    <div class="modal-footer">
+      <button class="modal-btn" onclick="document.getElementById('intro-modal').classList.add('hidden')">View prototype</button>
+    </div>
+  </div>
+</div>
 
 <!-- TOP NAV -->
 <nav class="top-nav">
@@ -383,8 +462,8 @@
         <button>Source</button>
       </div>
       <div class="fsd-content" id="fsd-content">
-        <h1># Airlock Remediation Assistant – Full System Directive</h1>
-        <blockquote>&gt; This document contains the complete system directives for all 9 interaction flows of the Airlock CVE Remediation Assistant agent.</blockquote>
+        <h1># Compliance Agent – Full System Directive</h1>
+        <blockquote>&gt; This document contains the complete system directives for all 9 interaction flows of the Compliance Agent.</blockquote>
         <hr/>
 
         <h2>## 1. Notification Workflow</h2>
@@ -479,7 +558,7 @@
       <div class="wf-num">1</div>
       <div>
         <div class="wf-title">Notification Workflow</div>
-        <div class="wf-subtitle">Channel: Google Chat · Meta Bot · Trigger-based push message</div>
+        <div class="wf-subtitle">Channel: Google Chat · Notification Bot · Trigger-based push message</div>
       </div>
     </div>
 
@@ -495,7 +574,7 @@
         </div>
         <div class="scenario-field">
           <strong>Body:</strong><br/>
-          Hey, <span class="var">{firstname}</span>. There are instances of software on your device <span class="var">{device_name}</span> requiring attention in Airlock.
+          Hey, <span class="var">{firstname}</span>. There are instances of software on your device <span class="var">{device_name}</span> requiring attention in the Resolution Center.
         </div>
         <ul class="scenario-list">
           <li>Software instances requiring attention: <span class="var">{count}</span></li>
@@ -544,7 +623,7 @@
     <div class="quick-actions">
       <div class="qa-label">Quick Action Buttons</div>
       <div class="qa-buttons">
-        <button class="btn-qa-primary">Visit Airlock</button>
+        <button class="btn-qa-primary">Visit Resolution Center</button>
         <button class="btn-qa-secondary">Remind me tomorrow</button>
         <button class="btn-qa-tertiary">Request an exemption</button>
         <span class="qa-note">(if Chat supports quick action callbacks)</span>
@@ -560,7 +639,7 @@
       <div class="wf-num">2</div>
       <div>
         <div class="wf-title">Software List</div>
-        <div class="wf-subtitle">Channel: Airlock Web App · Conversational agent · User-initiated</div>
+        <div class="wf-subtitle">Channel: Resolution Center Web App · Conversational agent · User-initiated</div>
       </div>
     </div>
 
@@ -569,7 +648,7 @@
         <div class="col-label">Scenario &amp; Variable Script</div>
 
         <div class="scenario-field">
-          <strong>Trigger:</strong> User opens Airlock or selects "View my software list" from a notification.
+          <strong>Trigger:</strong> User opens Resolution Center or selects "View my software list" from a notification.
         </div>
         <div class="scenario-field">
           <strong>Agent message:</strong><br/>
@@ -633,7 +712,7 @@
       <div class="wf-num">3</div>
       <div>
         <div class="wf-title">Update Flow</div>
-        <div class="wf-subtitle">Channel: Airlock Web App · Conversational agent · Guided remediation</div>
+        <div class="wf-subtitle">Channel: Resolution Center Web App · Conversational agent · Guided remediation</div>
       </div>
     </div>
 
@@ -653,7 +732,7 @@
           <li>Estimated time: <span class="var">{eta_range}</span></li>
           <li>Deadline: <span class="var">{deadline_date}</span></li>
         </ul>
-        <p class="scenario-note">Open the remediation wiki for step-by-step instructions. If the update isn't available on your device, let me know and we'll find another path.</p>
+        <p class="scenario-note">Open the Remediation Tool for step-by-step instructions. If the update isn't available on your device, let me know and we'll find another path.</p>
       </div>
 
       <div class="col-voice">
@@ -671,7 +750,7 @@
           <div>
             <div class="dd-col-head">Do</div>
             <div class="do-item"><span class="chk">✓</span> Name the specific software and version</div>
-            <div class="do-item"><span class="chk">✓</span> Link directly to the remediation wiki</div>
+            <div class="do-item"><span class="chk">✓</span> Link directly to the Remediation Tool</div>
             <div class="do-item"><span class="chk">✓</span> Offer an "update not available" escape</div>
           </div>
           <div>
@@ -690,7 +769,7 @@
     <div class="quick-actions">
       <div class="qa-label">Quick Action Buttons: Update_Flow</div>
       <div class="qa-buttons">
-        <button class="btn-qa-primary">Open remediation wiki</button>
+        <button class="btn-qa-primary">Open Remediation Tool</button>
         <button class="btn-qa-secondary">Update isn't available</button>
         <button class="btn-qa-tertiary">Verify software status</button>
         <button class="btn-qa-tertiary">Back to list</button>
@@ -706,7 +785,7 @@
       <div class="wf-num">4</div>
       <div>
         <div class="wf-title">Uninstall Flow</div>
-        <div class="wf-subtitle">Channel: Airlock Web App · Conversational agent · Guided remediation</div>
+        <div class="wf-subtitle">Channel: Resolution Center Web App · Conversational agent · Guided remediation</div>
       </div>
     </div>
 
@@ -763,7 +842,7 @@
     <div class="quick-actions">
       <div class="qa-label">Quick Action Buttons: Uninstall_Flow</div>
       <div class="qa-buttons">
-        <button class="btn-qa-primary">View remediation wiki</button>
+        <button class="btn-qa-primary">View Remediation Tool</button>
         <button class="btn-qa-secondary">Verify software status</button>
         <button class="btn-qa-tertiary">Request exemption</button>
         <button class="btn-qa-tertiary">Back to list</button>
@@ -779,7 +858,7 @@
       <div class="wf-num">5</div>
       <div>
         <div class="wf-title">Exemption Flow</div>
-        <div class="wf-subtitle">Channel: Airlock Web App · Conversational agent · User-initiated request</div>
+        <div class="wf-subtitle">Channel: Resolution Center Web App · Conversational agent · User-initiated request</div>
       </div>
     </div>
 
@@ -854,7 +933,7 @@
       <div class="wf-num">6</div>
       <div>
         <div class="wf-title">Reminders</div>
-        <div class="wf-subtitle">Channel: Google Chat · Meta Bot · Scheduled reminder</div>
+        <div class="wf-subtitle">Channel: Google Chat · Notification Bot · Scheduled reminder</div>
       </div>
     </div>
 
@@ -870,13 +949,13 @@
         </div>
         <div class="scenario-field">
           <strong>Body:</strong><br/>
-          Hey <span class="var">{firstname}</span> — just a heads up. <span class="var">{software_name}</span> on <span class="var">{device_name}</span> still needs attention in Airlock.
+          Hey <span class="var">{firstname}</span> — just a heads up. <span class="var">{software_name}</span> on <span class="var">{device_name}</span> still needs attention in the Resolution Center.
         </div>
         <ul class="scenario-list">
           <li>Deadline: <span class="var">{deadline_date}</span> (<span class="var">{days_remaining}</span> days)</li>
           <li>Estimated fix time: <span class="var">{eta_range}</span></li>
         </ul>
-        <p class="scenario-note">Visit Airlock any time to get started. Reply "Remind me tomorrow" if you need more time.</p>
+        <p class="scenario-note">Visit the Resolution Center any time to get started. Reply "Remind me tomorrow" if you need more time.</p>
       </div>
 
       <div class="col-voice">
@@ -913,7 +992,7 @@
     <div class="quick-actions">
       <div class="qa-label">Quick Action Buttons: Reminder_Flow · Google Chat</div>
       <div class="qa-buttons">
-        <button class="btn-qa-primary">Visit Airlock</button>
+        <button class="btn-qa-primary">Visit Resolution Center</button>
         <button class="btn-qa-secondary">Remind me tomorrow</button>
         <button class="btn-qa-tertiary">Request an exemption</button>
       </div>
@@ -928,7 +1007,7 @@
       <div class="wf-num">7</div>
       <div>
         <div class="wf-title">Urgency</div>
-        <div class="wf-subtitle">Channel: Google Chat · Meta Bot · Deadline-triggered push message</div>
+        <div class="wf-subtitle">Channel: Google Chat · Notification Bot · Deadline-triggered push message</div>
       </div>
     </div>
 
@@ -950,7 +1029,7 @@
           <li>If unresolved by <span class="var">{block_datetime}</span>, your access to <span class="var">{blocked_service}</span> may be suspended.</li>
           <li>Estimated fix time: <span class="var">{eta_range}</span></li>
         </ul>
-        <p class="scenario-note">Visit Airlock now to resolve this. If you need help, contact the Help Desk.</p>
+        <p class="scenario-note">Visit the Resolution Center now to resolve this. If you need help, contact the Help Desk.</p>
       </div>
 
       <div class="col-voice">
@@ -987,7 +1066,7 @@
     <div class="quick-actions">
       <div class="qa-label">Quick Action Buttons: Urgent · Google Chat</div>
       <div class="qa-buttons">
-        <button class="btn-qa-primary">Visit Airlock</button>
+        <button class="btn-qa-primary">Visit Resolution Center</button>
         <button class="btn-qa-secondary">Remind me tomorrow</button>
         <button class="btn-qa-tertiary">Request an exemption</button>
       </div>
@@ -1002,7 +1081,7 @@
       <div class="wf-num">8</div>
       <div>
         <div class="wf-title">Verification</div>
-        <div class="wf-subtitle">Channel: Airlock Web App · Conversational agent · Status check</div>
+        <div class="wf-subtitle">Channel: Resolution Center Web App · Conversational agent · Status check</div>
       </div>
     </div>
 
@@ -1086,7 +1165,7 @@
       <div class="wf-num">9</div>
       <div>
         <div class="wf-title">Help &amp; Support</div>
-        <div class="wf-subtitle">Channel: Airlock Web App · Conversational agent · Support escalation</div>
+        <div class="wf-subtitle">Channel: Resolution Center Web App · Conversational agent · Support escalation</div>
       </div>
     </div>
 
@@ -1159,7 +1238,7 @@
 
       <div class="summary-card">
         <div class="sc-title">NOTIFICATION <span class="sc-channel">· Google Chat</span></div>
-        <div class="sc-actions">Visit Airlock · Remind me tomorrow · Request an exemption</div>
+        <div class="sc-actions">Visit Resolution Center · Remind me tomorrow · Request an exemption</div>
       </div>
 
       <div class="summary-card">
@@ -1169,12 +1248,12 @@
 
       <div class="summary-card">
         <div class="sc-title">UPDATE_FLOW</div>
-        <div class="sc-actions">Open remediation wiki · Update isn't available · Verify software status · Back to list</div>
+        <div class="sc-actions">Open Remediation Tool · Update isn't available · Verify software status · Back to list</div>
       </div>
 
       <div class="summary-card">
         <div class="sc-title">UNINSTALL_FLOW</div>
-        <div class="sc-actions">View remediation wiki · Request exemption · Verify software status · Back to list</div>
+        <div class="sc-actions">View Remediation Tool · Request exemption · Verify software status · Back to list</div>
       </div>
 
       <div class="summary-card">
@@ -1184,12 +1263,12 @@
 
       <div class="summary-card">
         <div class="sc-title">REMINDER_FLOW <span class="sc-channel">· Google Chat</span></div>
-        <div class="sc-actions">Visit Airlock · Remind me tomorrow · Request an exemption</div>
+        <div class="sc-actions">Visit Resolution Center · Remind me tomorrow · Request an exemption</div>
       </div>
 
       <div class="summary-card">
         <div class="sc-title">URGENT <span class="sc-channel">· Google Chat</span></div>
-        <div class="sc-actions">Visit Airlock · Remind me tomorrow · Request an exemption</div>
+        <div class="sc-actions">Visit Resolution Center · Remind me tomorrow · Request an exemption</div>
       </div>
 
       <div class="summary-card">
@@ -1225,7 +1304,7 @@
   function copyFullDirective() {
     const content = document.getElementById('fsd-content').innerText;
     navigator.clipboard.writeText(content).then(() => {
-      alert('Full system directive copied to clipboard.');
+      alert('The entire system directive has been copied to clipboard!');
     });
   }
 
@@ -1244,7 +1323,7 @@
     };
     const text = directives[sectionNum] || '';
     navigator.clipboard.writeText(text).then(() => {
-      alert(`Section ${sectionNum} system directive copied to clipboard.`);
+      alert(`Interaction ${sectionNum} system directive copied to clipboard!`);
     });
   }
 
