@@ -345,6 +345,28 @@
     .fsd-content::-webkit-scrollbar-track { background: #1f2937; }
     .fsd-content::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
 
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #111827;
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 6px;
+      font-size: 13px;
+      opacity: 0;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+      z-index: 2000;
+      white-space: nowrap;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
     /* ── INTRO MODAL ── */
     .modal-overlay {
       position: fixed;
@@ -412,6 +434,9 @@
   </style>
 </head>
 <body>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <!-- INTRO MODAL -->
 <div class="modal-overlay" id="intro-modal">
@@ -1291,6 +1316,14 @@
 </div><!-- /page -->
 
 <script>
+  // Toast helper
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
   // Toggle Full System Directive
   function toggleFSD() {
     const body = document.getElementById('fsd-body');
@@ -1304,7 +1337,7 @@
   function copyFullDirective() {
     const content = document.getElementById('fsd-content').innerText;
     navigator.clipboard.writeText(content).then(() => {
-      alert('The entire system directive has been copied to clipboard!');
+      showToast('The entire system directive has been copied to clipboard!');
     });
   }
 
@@ -1323,7 +1356,7 @@
     };
     const text = directives[sectionNum] || '';
     navigator.clipboard.writeText(text).then(() => {
-      alert(`Interaction ${sectionNum} system directive copied to clipboard!`);
+      showToast(`Interaction ${sectionNum} system directive copied to clipboard!`);
     });
   }
 
