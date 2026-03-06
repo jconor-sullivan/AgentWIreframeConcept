@@ -545,9 +545,14 @@
     </div>
 
     <div class="guide-section">
+      <div class="guide-section-title">Quick Action Buttons</div>
+      <p style="font-size:13px;color:#374151;line-height:1.7">Below each interaction table is a set of quick action buttons. These represent the suggested response options surfaced to the user at that point in the conversation. Button styles indicate hierarchy; a filled blue button is the primary action, a green outlined button is secondary, and a gray outlined button is tertiary.</p>
+    </div>
+
+    <div class="guide-section">
       <div class="guide-section-title">Copying to clipboard</div>
       <p style="font-size:13px;color:#374151;line-height:1.7">Each interaction has a <strong>Copy system directive</strong> button on the right column; use this to copy the markdown for that individual interaction. To copy the full experience at once, use the <strong>Copy full system directive</strong> button in the banner at the top.</p>
-      <p style="font-size:13px;color:#374151;line-height:1.7;margin-top:10px">You can expand the banner and switch to the <strong>Source</strong> tab to read and edit the raw markdown directly. Any edits made there will automatically be reflected when copying individual interactions; so you only need to edit in one place.</p>
+      <p style="font-size:13px;color:#374151;line-height:1.7;margin-top:10px">You can expand the banner and switch to the <strong>Edit source</strong> tab to read and edit the raw markdown directly. Any edits made there will automatically be reflected when copying individual interactions; so you only need to edit in one place.</p>
     </div>
 
     <div class="modal-footer">
@@ -590,8 +595,8 @@
     </div>
     <div class="fsd-body" id="fsd-body">
       <div class="fsd-view-tabs">
-        <button class="active" onclick="switchFSDView('rendered', this)">Rendered</button>
-        <button onclick="switchFSDView('source', this)">Source</button>
+        <button class="active" onclick="switchFSDView('rendered', this)">Markdown</button>
+        <button onclick="switchFSDView('source', this)">Edit source</button>
       </div>
       <div class="fsd-content" id="fsd-content" contenteditable="true" spellcheck="false">
         <h1># Compliance Agent – Full System Directive</h1>
