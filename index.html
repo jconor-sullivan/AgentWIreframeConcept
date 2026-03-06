@@ -345,6 +345,73 @@
     .fsd-content::-webkit-scrollbar-track { background: #1f2937; }
     .fsd-content::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
 
+    /* ── SOURCE VIEW ── */
+    #fsd-source {
+      display: none;
+      padding: 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 12.5px;
+      color: #d1d5db;
+      line-height: 1.7;
+      max-height: 380px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      outline: none;
+    }
+    #fsd-source::-webkit-scrollbar { width: 6px; }
+    #fsd-source::-webkit-scrollbar-track { background: #1f2937; }
+    #fsd-source::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+
+    /* ── LEARN MORE BUTTON ── */
+    .learn-more-btn {
+      margin-left: auto;
+      align-self: center;
+      background: none;
+      border: 1.5px solid #e8640c;
+      color: #e8640c;
+      padding: 5px 14px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .learn-more-btn:hover { background: #e8640c; color: #fff; }
+
+    /* ── GUIDE MODAL ── */
+    .guide-section { margin-bottom: 20px; }
+    .guide-section:last-of-type { margin-bottom: 0; }
+    .guide-section-title {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #e8640c;
+      margin-bottom: 7px;
+    }
+    .guide-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .guide-col {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+      padding: 14px;
+    }
+    .guide-col-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+    .guide-col p { font-size: 12.5px; color: #374151; line-height: 1.6; margin-bottom: 0; }
+
     /* ── TOAST ── */
     .toast {
       position: fixed;
@@ -443,11 +510,41 @@
   <div class="modal">
     <div class="modal-eyebrow">Prototype Concept</div>
     <h2>Agentic Content Design: Engineering Handoff</h2>
-    <p>This prototype demonstrates how agentic content design flows can be structured for handoff to engineering — covering interaction models, voice &amp; tone specifications, variable scripts, and quick action architecture.</p>
+    <p>This prototype demonstrates how agentic content design flows can be structured for handoff to engineering; covering interaction models, voice &amp; tone specifications, variable scripts, and quick action architecture.</p>
     <p>The concept and content were designed by <strong>J. Conor Sullivan</strong>. The scenario depicts an enterprise agent that guides employees through remediating non-compliant software on their work devices. All product and brand references have been whitelabeled.</p>
+    <p>Select <strong>Learn more</strong> in the top navigation at any time to understand how the content design system works and how to use it.</p>
     <p class="modal-contact">Contact: <a href="mailto:jconor.sullivan@gmail.com">jconor.sullivan@gmail.com</a></p>
     <div class="modal-footer">
       <button class="modal-btn" onclick="document.getElementById('intro-modal').classList.add('hidden')">View prototype</button>
+    </div>
+  </div>
+</div>
+
+<!-- GUIDE MODAL -->
+<div class="modal-overlay hidden" id="guide-modal">
+  <div class="modal" style="max-width:560px">
+    <div class="modal-eyebrow">How to use this prototype</div>
+    <h2>Reading the Interaction Tables</h2>
+
+    <div class="guide-cols">
+      <div class="guide-col">
+        <div class="guide-col-label">Left column</div>
+        <p>Represents the user-facing experience; what an employee might see when chatting with the agent. It includes the trigger conditions, message copy, variable placeholders, and any contextual notes.</p>
+      </div>
+      <div class="guide-col">
+        <div class="guide-col-label">Right column</div>
+        <p>Represents what is baked into the agent's system prompt; the directive that controls its behavior, voice, and tone. This is what engineers implement to govern how the agent responds in each interaction.</p>
+      </div>
+    </div>
+
+    <div class="guide-section">
+      <div class="guide-section-title">Copying to clipboard</div>
+      <p style="font-size:13px;color:#374151;line-height:1.7">Each interaction has a <strong>Copy system directive</strong> button on the right column; use this to copy the markdown for that individual interaction. To copy the full experience at once, use the <strong>Copy full system directive</strong> button in the banner at the top.</p>
+      <p style="font-size:13px;color:#374151;line-height:1.7;margin-top:10px">You can expand the banner and switch to the <strong>Source</strong> tab to read and edit the raw markdown directly. Any edits made there will automatically be reflected when copying individual interactions; so you only need to edit in one place.</p>
+    </div>
+
+    <div class="modal-footer">
+      <button class="modal-btn" onclick="document.getElementById('guide-modal').classList.add('hidden')">Got it</button>
     </div>
   </div>
 </div>
@@ -463,6 +560,7 @@
   <a href="#section-7">7 · Urgency</a>
   <a href="#section-8">8 · Verification</a>
   <a href="#section-9">9 · Help &amp; Support</a>
+  <button class="learn-more-btn" onclick="document.getElementById('guide-modal').classList.remove('hidden')">Learn more</button>
 </nav>
 
 <div class="page">
@@ -483,10 +581,10 @@
     </div>
     <div class="fsd-body" id="fsd-body">
       <div class="fsd-view-tabs">
-        <button class="active">Rendered</button>
-        <button>Source</button>
+        <button class="active" onclick="switchFSDView('rendered', this)">Rendered</button>
+        <button onclick="switchFSDView('source', this)">Source</button>
       </div>
-      <div class="fsd-content" id="fsd-content">
+      <div class="fsd-content" id="fsd-content" contenteditable="true" spellcheck="false">
         <h1># Compliance Agent – Full System Directive</h1>
         <blockquote>&gt; This document contains the complete system directives for all 9 interaction flows of the Compliance Agent.</blockquote>
         <hr/>
@@ -572,6 +670,7 @@
         <br/>
         <p><strong>**Tone:**</strong> Empathetic, Efficient, Helpful</p>
       </div>
+      <div id="fsd-source" contenteditable="true" spellcheck="false"></div>
     </div>
   </div>
 
@@ -1316,6 +1415,120 @@
 </div><!-- /page -->
 
 <script>
+  // Rendered / Source tab toggle
+  const rawSource = `# Compliance Agent – Full System Directive
+
+> This document contains the complete system directives for all 9 interaction flows of the Compliance Agent.
+
+---
+
+## 1. Notification Workflow
+
+You are a security compliance assistant delivering a push notification via Google Chat. The user is not necessarily technical. This is the first touch. Keep the total message under 60 words. Lead with what they need to do, not what went wrong. Communicate deadline urgency without language that triggers defensive reactions.
+
+**Tone:** Direct, Brief, Non-alarmist, Action-first
+
+### Do
+- Open with a friendly, personal greeting
+- Surface key data as scannable bullets
+- Offer one clear primary action
+- State consequence once, briefly
+
+### Do Not
+- Use words like "violation" or "breach"
+- Name CVEs or CVSS scores in Chat
+- Send more than once per day unless deadline is under 48h
+- Include device IDs in shared channels
+
+---
+
+## 2. Software List
+
+You are presenting the user's list of non-compliant software. Be concise. Show the most urgent item first. Make it easy to act on one item at a time. The goal is to reduce friction and help the user start—not to overwhelm them with the full scope of the problem.
+
+**Tone:** Organized, Calm, Action-oriented
+
+### Do
+- Lead with the highest-priority item
+- Group by deadline urgency
+- Offer a clear entry point per item
+
+### Do Not
+- List all items without priority order
+- Use technical package names without context
+- Imply the user is at fault
+
+---
+
+## 3. Update Flow
+
+You are guiding the user through a software update remediation. Keep instructions short and step-based. Acknowledge their effort. If they get stuck, offer an escape hatch without making them feel like they've failed.
+
+**Tone:** Supportive, Clear, Step-by-step
+
+---
+
+## 4. Uninstall Flow
+
+You are guiding the user through an uninstall. This can feel high-stakes to users. Reassure them that uninstalling is the right action here. Confirm what they're removing and why it matters. Give them confidence that this resolves their compliance issue.
+
+**Tone:** Reassuring, Definitive, Simple
+
+---
+
+## 5. Exemption Flow
+
+You are helping the user request an exemption for software they cannot remediate. Ask only for what's needed. Frame questions neutrally—no judgment about why they need an exemption. Help them build a strong case efficiently.
+
+**Tone:** Neutral, Efficient, Non-judgmental
+
+---
+
+## 6. Reminders
+
+You are sending a follow-up reminder. The user has already been notified at least once. Do not repeat the full context. Reference the deadline specifically. Be brief. Offer the same primary action.
+
+**Tone:** Brief, Friendly, Persistent-but-not-nagging
+
+---
+
+## 7. Urgency
+
+The user's deadline is approaching or has passed. Communicate urgency clearly without panic. Specify the exact consequence and timeline. Offer one immediate action. Do not send repeatedly—once per day maximum unless block is imminent.
+
+**Tone:** Urgent, Specific, Calm-but-serious
+
+---
+
+## 8. Verification
+
+You are confirming the user's compliance status after they have taken action. Be clear and immediate. If compliant, celebrate briefly. If pending, explain what's happening. If still non-compliant, help them understand next steps without blame.
+
+**Tone:** Clear, Affirming, Constructive
+
+---
+
+## 9. Help & Support
+
+The user needs assistance beyond self-service. Acknowledge their situation. Route them to the right support channel quickly. Do not make them explain themselves at length before they can get help.
+
+**Tone:** Empathetic, Efficient, Helpful`;
+
+  function switchFSDView(view, btn) {
+    const rendered = document.getElementById('fsd-content');
+    const source = document.getElementById('fsd-source');
+    document.querySelectorAll('.fsd-view-tabs button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if (view === 'source') {
+      if (!source.textContent.trim()) source.textContent = rawSource;
+      rendered.style.display = 'none';
+      source.style.display = 'block';
+    } else {
+      rendered.style.display = 'block';
+      source.style.display = 'none';
+    }
+  }
+
   // Toast helper
   function showToast(msg) {
     const t = document.getElementById('toast');
@@ -1335,26 +1548,35 @@
 
   // Copy full directive text
   function copyFullDirective() {
-    const content = document.getElementById('fsd-content').innerText;
+    const sourceEl = document.getElementById('fsd-source');
+    const content = (sourceEl.style.display === 'block' ? sourceEl.innerText : document.getElementById('fsd-content').innerText).trim();
     navigator.clipboard.writeText(content).then(() => {
       showToast('The entire system directive has been copied to clipboard!');
     });
   }
 
-  // Copy individual section directive
+  // Get current source — uses edited source if available, otherwise falls back to rawSource
+  function getCurrentSource() {
+    const sourceEl = document.getElementById('fsd-source');
+    return sourceEl.textContent.trim() || rawSource;
+  }
+
+  // Parse source and extract the directive for a given section number
+  function getDirectiveForSection(sectionNum) {
+    const text = getCurrentSource();
+    const parts = text.split(/\n---\n/);
+    for (const part of parts) {
+      const match = part.match(/^##\s+(\d+)\./m);
+      if (match && parseInt(match[1]) === sectionNum) {
+        return part.trim();
+      }
+    }
+    return '';
+  }
+
+  // Copy individual section directive — always reads from live source
   function copyDirective(sectionNum) {
-    const directives = {
-      1: `You are a security compliance assistant delivering a push notification via Google Chat. The user is not necessarily technical. This is the first touch. Keep the total message under 60 words. Lead with what they need to do, not what went wrong. Communicate deadline urgency without language that triggers defensive reactions.\n\nTone: Direct, Brief, Non-alarmist, Action-first\n\nDo:\n- Open with a friendly, personal greeting\n- Surface key data as scannable bullets\n- Offer one clear primary action\n- State consequence once, briefly\n\nDo Not:\n- Use words like "violation" or "breach"\n- Name CVEs or CVSS scores in Chat\n- Send more than once per day unless deadline is under 48h\n- Include device IDs in shared channels`,
-      2: `You are presenting a prioritized list of non-compliant software. The user may feel overwhelmed. Lead with the highest-priority item only. Keep context minimal. Your goal is to lower activation energy, not to convey the full scope of the problem at once.`,
-      3: `You are guiding the user through a software update. Keep steps short and numbered. Acknowledge their effort. If they hit a blocker, offer an escape hatch without making them feel like they've failed.`,
-      4: `You are guiding the user through an uninstall. This can feel high-stakes. Reassure them that uninstalling resolves the issue entirely. Be specific about what they're removing.`,
-      5: `You are helping the user request a compliance exemption. Ask only for what's required. Frame all questions neutrally. Help them build a clear, sufficient case without making them justify themselves at length.`,
-      6: `This is a follow-up reminder. The user has already been notified at least once. Keep it shorter than the first message. Reference the specific deadline. Be friendly and brief.`,
-      7: `The deadline is imminent. Communicate urgency clearly and specifically without triggering panic. Name the exact consequence and the exact time. Keep the message very short—under 50 words.`,
-      8: `You are confirming the user's compliance status. Be immediate and unambiguous. For compliant: celebrate briefly. For pending: set expectations without alarm. For non-compliant: stay constructive and offer a concrete next step.`,
-      9: `The user needs help beyond self-service. Acknowledge their situation without over-apologizing. Route them quickly. Pre-populate whatever you can. Don't make them re-explain their problem to get routed.`,
-    };
-    const text = directives[sectionNum] || '';
+    const text = getDirectiveForSection(sectionNum);
     navigator.clipboard.writeText(text).then(() => {
       showToast(`Interaction ${sectionNum} system directive copied to clipboard!`);
     });
@@ -1377,4 +1599,3 @@
 
 </body>
 </html>
-
